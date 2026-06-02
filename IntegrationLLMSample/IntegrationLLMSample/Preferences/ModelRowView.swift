@@ -11,6 +11,7 @@ struct ModelRowView: View {
     @StateObject var model: ModelItem
     let onDelete: () -> Void
     let onStateAction: () -> Void
+    let onSelectAction: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
@@ -27,7 +28,7 @@ struct ModelRowView: View {
                     .foregroundStyle(.secondary)
             }
             else {
-                Button("Select", action: onStateAction)
+                Button("Select", action: onSelectAction)
                     .buttonStyle(ModelActionButtonStyle(color: .green))
             }
             // Delete button

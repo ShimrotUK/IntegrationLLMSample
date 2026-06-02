@@ -18,6 +18,8 @@ struct ModelsPreferencesView: View {
                         viewModel.remove(model)
                     }, onStateAction: {
                         viewModel.handleStateAction(for: model)
+                    }, onSelectAction: {
+                        viewModel.selectModel(item: model)
                     })
                     .listRowSeparator(.visible)
                     .listRowInsets(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))

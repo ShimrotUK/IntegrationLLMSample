@@ -12,20 +12,20 @@ import Foundation
 class ModelSelectionManager {
     static let shared = ModelSelectionManager()
 
-    var selectedModelInfo: ModelInfo?
+    @Published var selectedModelInfo: ModelInfo?
 
+    private var provider = ModelProvidersManager.shared.provider(for: .huggingFace)
     private var cancellables = Set<AnyCancellable>()
 
     private init() {
-        let provider = ModelProvidersManager.shared.provider(for: .huggingFace)
+        Task {
+            self.provider.$availiableModelInfos.receive(on: DispatchQueue.main).sink { [weak self] modelInfos in
+                guard let self else { return }
 
-        provider.$availiableModelInfos.receive(on: DispatchQueue.main).sink { [weak self] modelInfos in
-            guard let self else { return }
-
-            self.selectedModelInfo = modelInfos.first(where: { info in
-                info.name == "mlx-community/Llama-3.2-1B-Instruct-4bit"
-            })
-        }.store(in: &self.cancellables)
-
+                self.selectedModelInfo = modelInfos.first(where: { info in
+                    info.name == "mlx-community/Llama-3.2-1B-Instruct-4bit"
+                })
+            }.store(in: &self.cancellables)
+        }
     }
 }

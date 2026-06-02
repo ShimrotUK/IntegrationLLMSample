@@ -18,6 +18,19 @@ class RequestResponceModel: ObservableObject, Identifiable, Equatable {
         case pending(result: String?)
         case ready(result: String)
         case error
+
+        var text : String {
+            switch self {
+            case .initial:
+                return "Initial"
+            case .pending(let result):
+                return "Pending ... " + (result ?? "")
+            case .ready(let result):
+                return "Complete answer:" + result
+            case .error:
+                return "Some error occurred"
+            }
+        }
     }
 
     let id: UUID

@@ -7,8 +7,12 @@
 import SwiftUI
 
 struct RequestResponceBubble: View {
-    let model: RequestResponceModel
+    @ObservedObject private var model: RequestResponceModel
 
+    init(model: RequestResponceModel) {
+        self.model = model
+    }
+    
     var body: some View {
         HStack {
             Spacer(minLength: 60)
@@ -23,7 +27,7 @@ struct RequestResponceBubble: View {
                 }
                 Rectangle().fill(Color.gray.opacity(0.3)).frame(minWidth: 10, maxHeight: 10)
                 HStack {
-                    Text(model.request)
+                    Text(model.responce.text)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 8)
                         .foregroundStyle(.primary)

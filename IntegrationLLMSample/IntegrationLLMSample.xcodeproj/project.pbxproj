@@ -7,14 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7EBF4F4B2FCED04C00C67A65 /* LLMSampleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EBF4F482FCED02000C67A65 /* LLMSampleKit.framework */; };
-		7EBF4F4C2FCED04C00C67A65 /* LLMSampleKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7EBF4F482FCED02000C67A65 /* LLMSampleKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		463755712FCF4F6700B971CB /* LLMSampleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4637556E2FCF4EFF00B971CB /* LLMSampleKit.framework */; };
+		463755722FCF4F6700B971CB /* LLMSampleKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4637556E2FCF4EFF00B971CB /* LLMSampleKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7EBF4F472FCED02000C67A65 /* PBXContainerItemProxy */ = {
+		463755692FCF4EFF00B971CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 7EBF4F222FCED02000C67A65 /* LLMSampleKit.xcodeproj */;
+			containerPortal = 463755202FCF4DDC00B971CB /* LLMSampleKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7EBF4E132FCD95AE00C67A65;
+			remoteInfo = LLMSampleKit;
+		};
+		4637556D2FCF4EFF00B971CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 463755202FCF4DDC00B971CB /* LLMSampleKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 7EBF4E142FCD95AE00C67A65;
 			remoteInfo = LLMSampleKit;
@@ -28,7 +35,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7EBF4F4C2FCED04C00C67A65 /* LLMSampleKit.framework in Embed Frameworks */,
+				463755722FCF4F6700B971CB /* LLMSampleKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,6 +43,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		463755202FCF4DDC00B971CB /* LLMSampleKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = LLMSampleKit.xcodeproj; sourceTree = "<group>"; };
 		7EBF4DAF2FCC76E100C67A65 /* IntegrationLLMSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntegrationLLMSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EBF4E332FCD95AF00C67A65 /* LLMSampleKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = LLMSampleKit.xcodeproj; sourceTree = "<group>"; };
 		7EBF4F222FCED02000C67A65 /* LLMSampleKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = LLMSampleKit.xcodeproj; sourceTree = "<group>"; };
@@ -79,13 +87,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EBF4F4B2FCED04C00C67A65 /* LLMSampleKit.framework in Frameworks */,
+				463755712FCF4F6700B971CB /* LLMSampleKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4637552D2FCF4DDC00B971CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4637556E2FCF4EFF00B971CB /* LLMSampleKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7EBF4DA62FCC76E100C67A65 = {
 			isa = PBXGroup;
 			children = (
@@ -120,7 +136,6 @@
 		7EBF4F252FCED02000C67A65 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7EBF4F482FCED02000C67A65 /* LLMSampleKit.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,6 +155,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4637556A2FCF4EFF00B971CB /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				7EBF4DB12FCC76E100C67A65 /* IntegrationLLMSample */,
@@ -186,6 +202,10 @@
 					ProjectRef = 7EBF4E332FCD95AF00C67A65 /* LLMSampleKit.xcodeproj */;
 				},
 				{
+					ProductGroup = 4637552D2FCF4DDC00B971CB /* Products */;
+					ProjectRef = 463755202FCF4DDC00B971CB /* LLMSampleKit.xcodeproj */;
+				},
+				{
 					ProductGroup = 7EBF4F252FCED02000C67A65 /* Products */;
 					ProjectRef = 7EBF4F222FCED02000C67A65 /* LLMSampleKit.xcodeproj */;
 				},
@@ -198,11 +218,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		7EBF4F482FCED02000C67A65 /* LLMSampleKit.framework */ = {
+		4637556E2FCF4EFF00B971CB /* LLMSampleKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = LLMSampleKit.framework;
-			remoteRef = 7EBF4F472FCED02000C67A65 /* PBXContainerItemProxy */;
+			remoteRef = 4637556D2FCF4EFF00B971CB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -226,6 +246,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4637556A2FCF4EFF00B971CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LLMSampleKit;
+			targetProxy = 463755692FCF4EFF00B971CB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		7EBF4DB82FCC76E600C67A65 /* Debug */ = {

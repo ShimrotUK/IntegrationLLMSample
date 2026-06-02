@@ -20,7 +20,6 @@ final class ModelsPreferencesViewModel: ObservableObject {
     let addModelAvailable: Bool = false
     private var identifierInfoMap = [UUID: ModelInfo]()
     private var provider: ModelProvider
-    private var downloadTasks: [UUID: Task<Void, Never>] = [:]
     private var cancellables = Set<AnyCancellable>()
 
     init() {
@@ -62,14 +61,9 @@ final class ModelsPreferencesViewModel: ObservableObject {
     }
 
     func remove(_ model: ModelItem) {
-        downloadTasks[model.id]?.cancel()
-        downloadTasks[model.id] = nil
-        models.removeAll { $0.id == model.id }
     }
 
     func addModel(name: String, downloadURL: String) {
-        let item = ModelItem(name: name, downloadURL: downloadURL)
-        models.append(item)
     }
 
     // MARK: - Private
@@ -85,7 +79,7 @@ final class ModelsPreferencesViewModel: ObservableObject {
     private func updateState(for item: ModelItem, state: Model.ModelState?) {
         switch state {
         case .initial, .none, .failed: item.state = .notLoaded
-        case .preparing(let progress): item.state = .loading(progress: progress?.fractionCompleted ?? 0 * 100)
+        case .preparing(let progress): item.state = .loading(progress: (progress?.fractionCompleted ?? 0))
         case .ready: item.state = .loaded
         case .some(_): item.state = .notLoaded
         }
@@ -117,11 +111,9 @@ final class ModelsPreferencesViewModel: ObservableObject {
                 self.updateState(for: item, state: state)
             }.store(in: &self.cancellables)
         }
-
     }
 
-    private func selectModel(at index: Int) {
-        let item = self.models[index]
+    func selectModel(item: ModelItem) {
         self.selectedModel?.selected = false
         self.selectedModel = item
         item.selected = true

@@ -15,6 +15,8 @@ struct ContentView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            ModelStatusView(viewModel: viewModel)
+            Divider()
             MainAreaView(viewModel: viewModel)
             Divider()
             BottomInputView(viewModel: viewModel)
