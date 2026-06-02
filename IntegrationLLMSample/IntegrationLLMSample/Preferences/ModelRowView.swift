@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ModelRowView: View {
-    @Binding var model: ModelItem
+    @StateObject var model: ModelItem
     let onDelete: () -> Void
     let onStateAction: () -> Void
 
@@ -21,7 +21,15 @@ struct ModelRowView: View {
 
             // State button
             stateButton
-
+            if model.selected {
+                Text("Selected")
+                    .font(.system(size: 12))
+                    .foregroundStyle(.secondary)
+            }
+            else {
+                Button("Select", action: onStateAction)
+                    .buttonStyle(ModelActionButtonStyle(color: .green))
+            }
             // Delete button
             Button(action: onDelete) {
                 Image(systemName: "xmark")
@@ -29,6 +37,7 @@ struct ModelRowView: View {
                     .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
+            .disabled(self.model.removable)
             .help("Remove model")
         }
         .padding(.vertical, 10)
@@ -37,36 +46,28 @@ struct ModelRowView: View {
     @ViewBuilder
     private var stateButton: some View {
         switch model.state {
-        case .load:
+        case .notLoaded:
             Button("Load", action: onStateAction)
                 .buttonStyle(ModelActionButtonStyle(color: .accentColor))
 
         case .loading(let progress):
             HStack(spacing: 6) {
-                ProgressView(value: progress)
-                    .progressViewStyle(.circular)
-                    .controlSize(.small)
-                    .frame(width: 14, height: 14)
+                if progress > 0 {
+                    ProgressView(value: progress)
+                        .progressViewStyle(.circular)
+                        .controlSize(.small)
+                        .frame(width: 14, height: 14)
+                }
                 Text("Loading…")
                     .font(.system(size: 12))
                     .foregroundStyle(.secondary)
             }
             .frame(width: 100)
 
-        case .select:
-            Button("Select", action: onStateAction)
-                .buttonStyle(ModelActionButtonStyle(color: .green))
-
-        case .selected:
-            HStack(spacing: 4) {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundStyle(.green)
-                    .font(.system(size: 13))
-                Text("Selected")
-                    .font(.system(size: 12))
-                    .foregroundStyle(.secondary)
-            }
-            .frame(width: 100)
+        case .loaded:
+            Text("ready to use")
+                .font(.system(size: 12))
+                .foregroundStyle(.secondary)
         }
     }
 }

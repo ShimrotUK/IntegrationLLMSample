@@ -7,20 +7,46 @@
 
 import SwiftUI
 import Combine
+import LLMSampleKit
 
 @MainActor
 final class ModelsPreferencesViewModel: ObservableObject {
 
-    @Published var models: [ModelItem] = [
-        ModelItem(name: "Llama 3.2 3B", downloadURL: "https://example.com/llama3.2-3b.gguf", state: .load),
-        ModelItem(name: "Mistral 7B", downloadURL: "https://example.com/mistral-7b.gguf", state: .select),
-        ModelItem(name: "Phi-3 Mini", downloadURL: "https://example.com/phi3-mini.gguf", state: .selected),
-    ]
+    @Published var models = [ModelItem]()
+    @Published var selectedModel: ModelItem?
 
     @Published var isAddModelPresented: Bool = false
 
-    // Active download tasks keyed by model id
+    let addModelAvailable: Bool = false
+    private var identifierInfoMap = [UUID: ModelInfo]()
+    private var provider: ModelProvider
     private var downloadTasks: [UUID: Task<Void, Never>] = [:]
+    private var cancellables = Set<AnyCancellable>()
+
+    init() {
+        self.provider = ModelProvidersManager.shared.provider(for: .huggingFace)
+        self.provider.$availiableModelInfos.receive(on: DispatchQueue.main).sink { [weak self] modelInfos in
+            guard let self else { return }
+
+            var newItems = [ModelItem]()
+            var idInfoMap = [UUID: ModelInfo]()
+            let selectedModel = ModelSelectionManager.shared.selectedModelInfo
+            for modelInfo in modelInfos {
+                let modelItem = ModelItem(name: modelInfo.name, downloadURL: modelInfo.remoteURL?.absoluteString)
+                newItems.append(modelItem)
+                idInfoMap[modelItem.id] = modelInfo
+                self.updateState(for: modelItem, info: modelInfo)
+
+                if selectedModel?.name == modelInfo.name {
+                    modelItem.selected = true
+                    self.selectedModel = modelItem
+                }
+            }
+            self.models = newItems
+            self.identifierInfoMap = idInfoMap
+
+        }.store(in: &self.cancellables)
+    }
 
     // MARK: - Actions
 
@@ -28,13 +54,9 @@ final class ModelsPreferencesViewModel: ObservableObject {
         guard let index = models.firstIndex(where: { $0.id == model.id }) else { return }
 
         switch models[index].state {
-        case .load:
+        case .notLoaded:
             startLoading(at: index)
-
-        case .select:
-            selectModel(at: index)
-
-        case .loading, .selected:
+        case .loading, .loaded:
             break // non-interactive states
         }
     }
@@ -46,43 +68,63 @@ final class ModelsPreferencesViewModel: ObservableObject {
     }
 
     func addModel(name: String, downloadURL: String) {
-        let item = ModelItem(name: name, downloadURL: downloadURL, state: .load)
+        let item = ModelItem(name: name, downloadURL: downloadURL)
         models.append(item)
     }
 
     // MARK: - Private
 
-    private func startLoading(at index: Int) {
-        let id = models[index].id
-        models[index].state = .loading(progress: 0)
+    private func updateState(for item: ModelItem, info: ModelInfo) {
+        Task { [weak self] in
+            guard let self else { return }
 
-        // Simulate download progress — replace with URLSession download task
-        let task = Task {
-            var progress = 0.0
-            while progress < 1.0 {
-                try? await Task.sleep(for: .milliseconds(80))
-                guard !Task.isCancelled else { return }
-                progress = min(progress + Double.random(in: 0.02...0.08), 1.0)
-                if let i = models.firstIndex(where: { $0.id == id }) {
-                    models[i].state = .loading(progress: progress)
-                }
-            }
-            if let i = models.firstIndex(where: { $0.id == id }) {
-                models[i].state = .select
-            }
-            downloadTasks[id] = nil
+            self.updateState(for: item, state: try? await self.provider.model(for: info).state)
         }
-        downloadTasks[id] = task
+    }
+
+    private func updateState(for item: ModelItem, state: Model.ModelState?) {
+        switch state {
+        case .initial, .none, .failed: item.state = .notLoaded
+        case .preparing(let progress): item.state = .loading(progress: progress?.fractionCompleted ?? 0 * 100)
+        case .ready: item.state = .loaded
+        case .some(_): item.state = .notLoaded
+        }
+    }
+
+    private func startLoading(at index: Int) {
+        let item = models[index]
+        item.state = .loading(progress: 0)
+
+        Task { [weak self] in
+            guard let self, let modelInfo = self.identifierInfoMap[item.id] else { return }
+
+            guard let model = try? await self.provider.model(for: modelInfo) else { return }
+
+            self.updateState(for: item, state: model.state)
+
+            switch model.state {
+            case .initial, .failed:
+                model.prepareModel()
+            case .preparing, .ready:
+                return
+            @unknown default:
+                fatalError()
+            }
+
+            model.$state.receive(on: DispatchQueue.main).sink { [weak self] state in
+                guard let self else { return }
+
+                self.updateState(for: item, state: state)
+            }.store(in: &self.cancellables)
+        }
+
     }
 
     private func selectModel(at index: Int) {
-        let id = models[index].id
-        // Deselect any currently selected model
-        for i in models.indices where models[i].state == .selected {
-            models[i].state = .select
-        }
-        if let i = models.firstIndex(where: { $0.id == id }) {
-            models[i].state = .selected
-        }
+        let item = self.models[index]
+        self.selectedModel?.selected = false
+        self.selectedModel = item
+        item.selected = true
+        ModelSelectionManager.shared.selectedModelInfo = self.identifierInfoMap[item.id]
     }
 }

@@ -8,33 +8,40 @@
 import SwiftUI
 import Combine
 
-struct ModelItem: Identifiable {
+class ModelItem: Identifiable, ObservableObject {
     enum ModelState: Equatable {
-        case load
+        case notLoaded
         case loading(progress: Double)
-        case select
-        case selected
+        case loaded
 
         static func == (lhs: ModelState, rhs: ModelState) -> Bool {
             switch (lhs, rhs) {
-            case (.load, .load): return true
+            case (.notLoaded, .notLoaded): return true
             case (.loading(let a), .loading(let b)): return a == b
-            case (.select, .select): return true
-            case (.selected, .selected): return true
+            case (.loaded, .loaded): return true
             default: return false
             }
         }
     }
 
     let id: UUID
+    let removable: Bool
     var name: String
-    var downloadURL: String
-    var state: ModelState
+    var downloadURL: String?
+    @Published var state: ModelState
+    @Published var selected: Bool = false
 
-    init(id: UUID = UUID(), name: String, downloadURL: String, state: ModelState = .load) {
+    init(
+        id: UUID = UUID(),
+        name: String,
+        downloadURL: String?,
+        state: ModelState = .notLoaded,
+        removable: Bool = false
+    ) {
         self.id = id
         self.name = name
         self.downloadURL = downloadURL
         self.state = state
+        self.removable = removable
     }
 }

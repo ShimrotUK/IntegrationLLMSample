@@ -22,6 +22,6 @@ struct PreferencesView: View {
                     Label("Models", systemImage: "cpu")
                 }
         }
-        .frame(width: 520, height: 400)
+        .frame(width: 720, height: 600)
     }
 }

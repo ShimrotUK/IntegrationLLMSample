@@ -14,7 +14,7 @@ struct ModelsPreferencesView: View {
         VStack(spacing: 0) {
             List {
                 ForEach($viewModel.models) { $model in
-                    ModelRowView(model: $model, onDelete: {
+                    ModelRowView(model: model, onDelete: {
                         viewModel.remove(model)
                     }, onStateAction: {
                         viewModel.handleStateAction(for: model)
@@ -37,6 +37,7 @@ struct ModelsPreferencesView: View {
                 }
                 .buttonStyle(.plain)
                 .help("Add model")
+                .disabled(self.viewModel.addModelAvailable)
                 Spacer()
             }
             .padding(.horizontal, 12)
