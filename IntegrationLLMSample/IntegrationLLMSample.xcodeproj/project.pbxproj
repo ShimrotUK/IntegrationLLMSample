@@ -7,18 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		463755E32FCF95AE00B971CB /* LLMSampleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 463755E02FCF95AE00B971CB /* LLMSampleKit.framework */; };
-		463755E42FCF95AE00B971CB /* LLMSampleKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 463755E02FCF95AE00B971CB /* LLMSampleKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		469AE4042FCF99E800007004 /* LLMSampleKit in Frameworks */ = {isa = PBXBuildFile; productRef = 469AE4032FCF99E800007004 /* LLMSampleKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		463755DF2FCF95AE00B971CB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 463755932FCF954300B971CB /* LLMSampleKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 7EBF4E142FCD95AE00C67A65;
-			remoteInfo = LLMSampleKit;
-		};
 		463755E52FCF95C100B971CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 463755932FCF954300B971CB /* LLMSampleKit.xcodeproj */;
@@ -35,7 +27,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				463755E42FCF95AE00B971CB /* LLMSampleKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -45,28 +36,21 @@
 /* Begin PBXFileReference section */
 		463755202FCF4DDC00B971CB /* LLMSampleKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = LLMSampleKit.xcodeproj; sourceTree = "<group>"; };
 		463755932FCF954300B971CB /* LLMSampleKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = LLMSampleKit.xcodeproj; sourceTree = "<group>"; };
+		463756062FCF96B500B971CB /* LLMSampleKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = LLMSampleKit.xcodeproj; sourceTree = "<group>"; };
+		4637DFF62FCF987F00B971CB /* SwiftRefactorExtension.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = SwiftRefactorExtension.xcodeproj; sourceTree = "<group>"; };
+		4637EB952FCF988A00B971CB /* IntegrationTesting.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = IntegrationTesting.xcodeproj; sourceTree = "<group>"; };
+		4637F6122FCF988E00B971CB /* Atomics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Atomics.xcodeproj; sourceTree = "<group>"; };
+		4637F94D2FCF988E00B971CB /* Collections.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Collections.xcodeproj; sourceTree = "<group>"; };
 		7EBF4DAF2FCC76E100C67A65 /* IntegrationLLMSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntegrationLLMSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EBF4E332FCD95AF00C67A65 /* LLMSampleKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = LLMSampleKit.xcodeproj; sourceTree = "<group>"; };
 		7EBF4F222FCED02000C67A65 /* LLMSampleKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = LLMSampleKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		7EBF4E7C2FCD984700C67A65 /* Exceptions for "IntegrationLLMSample" folder in "IntegrationLLMSample" target */ = {
+		469AE4012FCF99BF00007004 /* Exceptions for "IntegrationLLMSample" folder in "IntegrationLLMSample" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Dependencies/LLMSampleKit/LLMSampleKit/HuggingFaceImplementation/HuggingFaceModalAdapter.swift,
-				Dependencies/LLMSampleKit/LLMSampleKit/HuggingFaceImplementation/HuggingFaceModalInfoStore.swift,
-				Dependencies/LLMSampleKit/LLMSampleKit/HuggingFaceImplementation/HuggingFaceModalStore.swift,
-				Dependencies/LLMSampleKit/LLMSampleKit/LLMSampleKit.docc,
-				Dependencies/LLMSampleKit/LLMSampleKit/LLMSampleKit.swift,
-				Dependencies/LLMSampleKit/LLMSampleKit/Model/Model.swift,
-				Dependencies/LLMSampleKit/LLMSampleKit/Model/ModelAdaptable.swift,
-				Dependencies/LLMSampleKit/LLMSampleKit/Model/ModelInfo.swift,
-				Dependencies/LLMSampleKit/LLMSampleKit/ModelProvider/ModelInfoStorable.swift,
-				Dependencies/LLMSampleKit/LLMSampleKit/ModelProvider/ModelStorable.swift,
-				Dependencies/LLMSampleKit/LLMSampleKit/Providers/ModelProvider.swift,
-				Dependencies/LLMSampleKit/LLMSampleKit/Providers/ModelProvidersManager.swift,
-				Dependencies/LLMSampleKit/LLMSampleKitTests/LLMSampleKitTests.swift,
+				Dependencies/LLMSampleKit,
 			);
 			target = 7EBF4DAE2FCC76E100C67A65 /* IntegrationLLMSample */;
 		};
@@ -76,7 +60,7 @@
 		7EBF4DB12FCC76E100C67A65 /* IntegrationLLMSample */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				7EBF4E7C2FCD984700C67A65 /* Exceptions for "IntegrationLLMSample" folder in "IntegrationLLMSample" target */,
+				469AE4012FCF99BF00007004 /* Exceptions for "IntegrationLLMSample" folder in "IntegrationLLMSample" target */,
 			);
 			path = IntegrationLLMSample;
 			sourceTree = "<group>";
@@ -88,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				463755E32FCF95AE00B971CB /* LLMSampleKit.framework in Frameworks */,
+				469AE4042FCF99E800007004 /* LLMSampleKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +89,41 @@
 		463755A02FCF954300B971CB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				463755E02FCF95AE00B971CB /* LLMSampleKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		463756132FCF96B500B971CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4637E0712FCF987F00B971CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4637ECB72FCF988A00B971CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4637F9622FCF988E00B971CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4637F9642FCF988E00B971CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,6 +188,7 @@
 			);
 			name = IntegrationLLMSample;
 			packageProductDependencies = (
+				469AE4032FCF99E800007004 /* LLMSampleKit */,
 			);
 			productName = IntegrationLLMSample;
 			productReference = 7EBF4DAF2FCC76E100C67A65 /* IntegrationLLMSample.app */;
@@ -200,11 +219,24 @@
 			mainGroup = 7EBF4DA62FCC76E100C67A65;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				469AE4022FCF99E800007004 /* XCLocalSwiftPackageReference "IntegrationLLMSample/Dependencies/LLMSampleKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7EBF4DB02FCC76E100C67A65 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 4637F9622FCF988E00B971CB /* Products */;
+					ProjectRef = 4637F6122FCF988E00B971CB /* Atomics.xcodeproj */;
+				},
+				{
+					ProductGroup = 4637F9642FCF988E00B971CB /* Products */;
+					ProjectRef = 4637F94D2FCF988E00B971CB /* Collections.xcodeproj */;
+				},
+				{
+					ProductGroup = 4637ECB72FCF988A00B971CB /* Products */;
+					ProjectRef = 4637EB952FCF988A00B971CB /* IntegrationTesting.xcodeproj */;
+				},
 				{
 					ProductGroup = 7EBF4E352FCD95AF00C67A65 /* Products */;
 					ProjectRef = 7EBF4E332FCD95AF00C67A65 /* LLMSampleKit.xcodeproj */;
@@ -221,6 +253,14 @@
 					ProductGroup = 7EBF4F252FCED02000C67A65 /* Products */;
 					ProjectRef = 7EBF4F222FCED02000C67A65 /* LLMSampleKit.xcodeproj */;
 				},
+				{
+					ProductGroup = 463756132FCF96B500B971CB /* Products */;
+					ProjectRef = 463756062FCF96B500B971CB /* LLMSampleKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 4637E0712FCF987F00B971CB /* Products */;
+					ProjectRef = 4637DFF62FCF987F00B971CB /* SwiftRefactorExtension.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -228,16 +268,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		463755E02FCF95AE00B971CB /* LLMSampleKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = LLMSampleKit.framework;
-			remoteRef = 463755DF2FCF95AE00B971CB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7EBF4DAD2FCC76E100C67A65 /* Resources */ = {
@@ -418,6 +448,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IntegrationLLMSample/Dependencies/LLMSampleKit/.build/index-build/prebuilts/swift-syntax/600.0.1/swiftlang-6.2.4.1.4-MacroSupport-macos_aarch64/lib",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yl.IntegrationLLMSample.IntegrationLLMSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -463,6 +497,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IntegrationLLMSample/Dependencies/LLMSampleKit/.build/index-build/prebuilts/swift-syntax/600.0.1/swiftlang-6.2.4.1.4-MacroSupport-macos_aarch64/lib",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yl.IntegrationLLMSample.IntegrationLLMSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -498,6 +536,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		469AE4022FCF99E800007004 /* XCLocalSwiftPackageReference "IntegrationLLMSample/Dependencies/LLMSampleKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = IntegrationLLMSample/Dependencies/LLMSampleKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		469AE4032FCF99E800007004 /* LLMSampleKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LLMSampleKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7EBF4DA72FCC76E100C67A65 /* Project object */;
 }
